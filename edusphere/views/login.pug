@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Login
+    if error
+      p.error= error
+    form(action="/login", method="POST")
+      label(for="email") Email:
+      input(type="email", name="email", required)
+      br
+      label(for="password") Password:
+      input(type="password", name="password", required)
+      br
+      button(type="submit") Login
+    a(href="/register") Register

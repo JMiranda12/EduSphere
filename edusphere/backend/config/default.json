@@ -1,0 +1,8 @@
+{
+    "dbHost": "eduspheredb.c5km4ii2op0l.eu-west-3.rds.amazonaws.com",
+    "dbPort": "5432",
+    "dbName": "edusphereDB",
+    "dbUser": "masteradmin",
+    "dbPassword": "adminadmin"
+  }
+  

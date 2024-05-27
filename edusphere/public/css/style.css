@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa; /* Light background color */
+  color: #333; /* Set default text color */
+}
+
+.navbar {
+  background-color: #002f6c; /* Dark blue color for navbar */
+}
+
+.hero {
+  background-color: #004080; /* Darker blue for hero section */
+  color: #fff; /* White text color for hero section */
+  padding: 100px 0;
+}
+
+.hero .btn-light {
+  background-color: #f8f9fa; /* Light color for button */
+  color: #004080; /* Darker blue text color */
+  border: none;
+}
+
+.hero .btn-light:hover {
+  background-color: #e2e6ea; /* Slightly darker on hover */
+}
+
+.features, .testimonials, .contact {
+  background-color: #ffffff; /* White background for features, testimonials, and contact sections */
+  padding: 50px 0;
+}
+
+.testimonial {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #002f6c; /* Dark blue background for footer */
+  color: #fff; /* Set footer text color for contrast */
+  padding: 20px 0;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+.logo {
+  width: 50px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px;
+}
+
+.container {
+  padding-top: 50px; /* Top padding for the container */
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for a nice effect */
+}
+
+.card-header {
+  background-color: #004080; /* Darker blue for header */
+  color: #fff; /* White text color for header */
+}
+
+.btn-primary {
+  background-color: #004080; /* Darker blue for button */
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #003366; /* Darker shade on hover */
+}
