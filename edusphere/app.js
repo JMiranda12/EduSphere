@@ -1,6 +1,11 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const fs = require('fs');
+const { JSDOM } = require('jsdom');
+const docxtemplater = require('docxtemplater');
+const PizZip = require('pizzip');
+const mammoth = require('mammoth');
 
 const app = express();
 
@@ -69,9 +74,51 @@ app.get('/teachers/search', (req, res) => {
 app.get('/teachers/list', (req, res) => {
   res.render('teachers_list', { title: 'List of Teachers' });
 });
-
 app.get('/uc/document', (req, res) => {
   res.render('uc_document', { title: 'UC Document' });
+});
+
+app.post('/uc/document', (req, res) => {
+  const formData = req.body;
+
+  // Save the form data to a Word document
+  const docTemplate = fs.readFileSync(path.resolve(__dirname, 'templates', 'document-template.docx'), 'binary');
+  const zip = new PizZip(docTemplate);
+  const doc = new docxtemplater(zip);
+
+  doc.setData(formData);
+  doc.render();
+
+  const buf = doc.getZip().generate({ type: 'nodebuffer' });
+  const wordFilePath = path.resolve(__dirname, 'output', 'document.docx');
+  fs.writeFileSync(wordFilePath, buf);
+
+  // Convert the Word document to PDF
+  const convertToPDF = async (inputPath, outputPath) => {
+    try {
+      const result = await mammoth.convertToHtml({ path: inputPath });
+      const html = result.value;
+
+      const { PDFDocument } = require('pdf-lib');
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage();
+      page.drawText(html, {
+        x: 50,
+        y: page.getHeight() - 50,
+        size: 12
+      });
+
+      const pdfBytes = await pdfDoc.save();
+      fs.writeFileSync(outputPath, pdfBytes);
+    } catch (err) {
+      console.error('Error converting to PDF:', err);
+    }
+  };
+
+  const pdfFilePath = path.resolve(__dirname, 'output', 'document.pdf');
+  convertToPDF(wordFilePath, pdfFilePath);
+
+  res.send('Form submitted successfully!');
 });
 
 // Start the server
