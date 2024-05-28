@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    header
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+        .container
+          a.navbar-brand.d-flex.align-items-center(href='#')
+            img(src='/img/logo.png' alt='EduSphere Logo' class='logo mr-2')
+            span EduSphere
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          .collapse.navbar-collapse#navbarNav
+            ul.navbar-nav.ml-auto
+              li.nav-item
+                a.nav-link(href='/') Home
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle(href='#' id='teachersDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Teachers
+                .dropdown-menu(aria-labelledby='teachersDropdown')
+                  a.dropdown-item(href='/teachers/search') Search
+                  a.dropdown-item(href='/teachers/list') List
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle(href='#' id='ucDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') UC
+                .dropdown-menu(aria-labelledby='ucDropdown')
+                  a.dropdown-item(href='/uc/document') Document
+              li.nav-item
+                a.nav-link(href='/login') Login
+    block content
+
+    footer.bg-dark.text-white.py-3
+      .container
+        .row
+          .col-md-6
+            p &copy; 2024 EduSphere
+          .col-md-6.text-right
+            a.text-white(href='#privacy') Privacy Policy
+            | 
+            a.text-white(href='#terms') Terms of Service
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')

@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const axios = require('axios'); // Add axios for HTTP requests
+const axios = require('axios');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Body parser middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // Add JSON parser middleware
+app.use(express.json());
 
 // Define routes
 app.get('/', (req, res) => {
@@ -25,13 +25,10 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  // Handle login logic here
   const { email, password } = req.body;
   try {
     const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-    // Store the token in the session or cookie
-    // Redirect to a protected page or dashboard
-    res.redirect('/dashboard'); // Modify this as per your app structure
+    res.redirect('/dashboard');
   } catch (error) {
     res.render('login', { title: 'Login', error: 'Invalid credentials' });
   }
@@ -42,33 +39,43 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-// Handle registration logic here
-app.post('/register', async (req, res) => {
-    const { name, email, password, confirmPassword } = req.body;
-    
-    if (password !== confirmPassword) {
-      return res.render('register', { title: 'Register', message: 'Passwords do not match' });
+  const { name, email, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    return res.render('register', { title: 'Register', message: 'Passwords do not match' });
+  }
+
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/register', {
+      name, email, password
+    });
+
+    if (response.status !== 200) {
+      return res.render('register', { title: 'Register', message: response.data.msg || 'Registration failed' });
     }
-  
-    try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
-  
-      const data = await response.json();
-      if (!response.ok) {
-        return res.render('register', { title: 'Register', message: data.msg || 'Registration failed' });
-      }
-  
-      res.redirect('/login');
-    } catch (error) {
-      console.error(error);
-      res.render('register', { title: 'Register', message: 'Server error' });
-    }
-  });
-  
+
+    res.redirect('/login');
+  } catch (error) {
+    console.error(error);
+    res.render('register', { title: 'Register', message: 'Server error' });
+  }
+});
+
+// New routes
+app.get('/teachers/search', (req, res) => {
+  res.render('teachers_search', { title: 'Search Teachers' });
+});
+
+app.get('/teachers/list', (req, res) => {
+  res.render('teachers_list', { title: 'List of Teachers' });
+});
+
+app.get('/uc/document', (req, res) => {
+  res.render('uc_document', { title: 'UC Document' });
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

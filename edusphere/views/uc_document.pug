@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  .container
+    h1 UC Document Form
+    form(action='/uc/document' method='post' id='ucForm')
+      .form-group
+        label(for='designacao') 1. Designação da unidade Curricular
+        input.form-control(type='text' id='designacao' name='designacao' required)
+      .form-group
+        label(for='sigla') 2. Sigla da área científica em que se insere
+        input.form-control(type='text' id='sigla' name='sigla' required)
+      .form-group
+        label(for='duracao') 3. Duração (anual, semestral ou trimestral)
+        input.form-control(type='text' id='duracao' name='duracao' required)
+      .form-group
+        label(for='horas_trabalho') 4. Horas de trabalho (Número total de horas de trabalho)
+        input.form-control(type='number' id='horas_trabalho' name='horas_trabalho' required)
+      .form-group
+        label(for='horas_contacto') 5. Horas de contacto (tipificações e horas para cada uma)
+        input.form-control(type='text' id='horas_contacto' name='horas_contacto' required)
+      .form-group
+        label(for='horas_distancia') 6. % Horas de contacto a distância
+        input.form-control(type='number' id='horas_distancia' name='horas_distancia' required)
+      .form-group
+        label(for='ects') 7. ECTS
+        input.form-control(type='number' id='ects' name='ects' required)
+      .form-group
+        label(for='docente_responsavel') 8. Docente responsável e respetiva carga letiva na Unidade Curricular
+        textarea.form-control(id='docente_responsavel' name='docente_responsavel' rows='3' required)
+      .form-group
+        label(for='outros_docentes') 9. Outros docentes e respetivas cargas letivas na unidade curricular
+        textarea.form-control(id='outros_docentes' name='outros_docentes' rows='3' required)
+      .form-group
+        label(for='objetivos') 10. Objetivos (gerais) de aprendizagem
+        textarea.form-control(id='objetivos' name='objetivos' rows='3' required)
+      .form-group
+        label(for='conteudos') 11. Conteúdos programáticos
+        textarea.form-control(id='conteudos' name='conteudos' rows='3' required)
+      .form-group
+        label(for='coerencia_conteudos') 12. Demonstração da coerência dos conteúdos programáticos com os objetivos de aprendizagem da unidade curricular
+        textarea.form-control(id='coerencia_conteudos' name='coerencia_conteudos' rows='3' required)
+      .form-group
+        label(for='metodologias') 13. Metodologias de ensino e de aprendizagem específicas da unidade curricular articuladas com o modelo pedagógico
+        textarea.form-control(id='metodologias' name='metodologias' rows='3' required)
+      .form-group
+        label(for='avaliacao') 14. Avaliação
+        textarea.form-control(id='avaliacao' name='avaliacao' rows='3' required)
+      .form-group
+        label(for='coerencia_metodologias') 15. Demonstração da coerência das metodologias de ensino e avaliação com os objetivos de aprendizagem da unidade curricular
+        textarea.form-control(id='coerencia_metodologias' name='coerencia_metodologias' rows='3' required)
+      .form-group
+        label(for='bibliografia') 16. Bibliografia de consulta/existência obrigatória
+        textarea.form-control(id='bibliografia' name='bibliografia' rows='3' required)
+      .form-group
+        label(for='observacoes') 17. Observações
+        textarea.form-control(id='observacoes' name='observacoes' rows='3')
+      button.btn.btn-primary(type='submit') Submit
