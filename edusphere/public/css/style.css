@@ -117,3 +117,38 @@ nav ul li ul li a {
   padding: 10px;
   white-space: nowrap;
 }
+
+.suggestions {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+  display: none;
+}
+
+.suggestions.active {
+  display: block;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-body {
+  max-height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.modal-body p strong {
+  display: inline-block;
+  width: 150px; /* Adjust as needed */
+}
+
+.modal-body p span {
+  display: inline-block;
+}

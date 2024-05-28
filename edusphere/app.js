@@ -6,8 +6,18 @@ const { JSDOM } = require('jsdom');
 const docxtemplater = require('docxtemplater');
 const PizZip = require('pizzip');
 const mammoth = require('mammoth');
+const { Pool } = require('pg');  // Add this line
 
 const app = express();
+
+// Set up the PostgreSQL client
+const pool = new Pool({
+  user: 'masteradmin',
+  host: 'eduspheredb.c5km4ii2op0l.eu-west-3.rds.amazonaws.com',
+  database: 'edusphereDB',
+  password: 'adminadmin',
+  port: 5432,  // Default PostgreSQL port
+});
 
 // Set Pug as the template engine
 app.set('view engine', 'pug');
@@ -66,14 +76,23 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// New routes
+
 app.get('/teachers/search', (req, res) => {
   res.render('teachers_search', { title: 'Search Teachers' });
 });
 
-app.get('/teachers/list', (req, res) => {
-  res.render('teachers_list', { title: 'List of Teachers' });
+// Fetch and display the list of teachers
+app.get('/teachers/list', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM teachers');
+    const teachers = result.rows;
+    res.render('teachers_list', { title: 'List of Teachers', teachers });
+  } catch (error) {
+    console.error('Error fetching teachers:', error);
+    res.render('teachers_list', { title: 'List of Teachers', teachers: [] });
+  }
 });
+
 app.get('/uc/document', (req, res) => {
   res.render('uc_document', { title: 'UC Document' });
 });
@@ -119,6 +138,20 @@ app.post('/uc/document', (req, res) => {
   convertToPDF(wordFilePath, pdfFilePath);
 
   res.send('Form submitted successfully!');
+});
+
+// Route to handle AI prompts
+app.post('/api/ai', async (req, res) => {
+  const { prompt } = req.body;
+  try {
+    const response = await axios.post('http://localhost:8080/v1/chat/completions', {
+      model: "lmstudio-ai/gemma-2b-it-GGUF", // Replace with your model name
+      messages: [{ role: "user", content: prompt }]
+    });
+    res.json({ response: response.data.choices[0].message.content });
+  } catch (error) {
+    res.status(500).json({ error: 'Error generating AI response' });
+  }
 });
 
 // Start the server

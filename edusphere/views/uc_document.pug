@@ -56,3 +56,55 @@ block content
         label(for='observacoes') 17. Observações
         textarea.form-control(id='observacoes' name='observacoes' rows='3')
       button.btn.btn-primary(type='submit') Submit
+
+    // Button to open AI chat-box
+    button.btn.btn-secondary(type='button' data-toggle='modal' data-target='#aiModal') Open AI Assistant
+
+    // Modal for AI chat-box
+    .modal.fade#aiModal(tabindex='-1' role='dialog')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            h5.modal-title AI Assistant
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            textarea.form-control#aiPrompt(rows='3' placeholder='Enter your prompt here...')
+            button.btn.btn-primary#sendPrompt(type='button') Send
+            hr
+            .ai-response#aiResponse
+            // Loading spinner
+            .spinner-border#loadingSpinner(role='status' style='display: none;')
+              span.sr-only Loading...
+          .modal-footer
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+    script.
+      document.getElementById('sendPrompt').addEventListener('click', async () => {
+        const prompt = document.getElementById('aiPrompt').value;
+        const aiResponse = document.getElementById('aiResponse');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        
+        aiResponse.innerHTML = '';
+        loadingSpinner.style.display = 'block';
+
+        try {
+          const response = await fetch('/api/ai', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt }),
+          });
+
+          const data = await response.json();
+          loadingSpinner.style.display = 'none';
+          aiResponse.innerHTML = `<p>${data.response}</p><button id="copyResponse" class="btn btn-outline-secondary">Copy</button>`;
+          document.getElementById('copyResponse').addEventListener('click', () => {
+            navigator.clipboard.writeText(data.response);
+          });
+        } catch (error) {
+          loadingSpinner.style.display = 'none';
+          aiResponse.innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
+        }
+      });
