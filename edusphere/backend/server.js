@@ -21,7 +21,7 @@ app.use(cors());
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 
-// Route to get all teachers
+
 app.get('/api/teachers', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM teachers');
@@ -53,6 +53,8 @@ app.get('/api/teachers/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// Start the server
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

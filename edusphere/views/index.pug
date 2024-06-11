@@ -3,53 +3,34 @@ extends layout
 block content
   .hero
     .container.text-center
-      h1.display-4 Welcome to EduSphere
-      p.lead The ultimate tool for university course management
-      a.btn.btn-lg.btn-light(href='#features') Learn More
+      h1.display-4 EduSphere
+      p.lead A ferramenta ideal para gestão universitária
+      a.btn.btn-lg.btn-light(href='#features') Descobrir
   .features#features
     .container
-      h2.text-center.mt-5 Features
+      h2.text-center.mt-5 Funcionalidades
       .row.mt-4
         .col-md-4
-          h3 Efficient Form Filling
-          p Streamline the process of filling out forms for new courses.
+          h3 Preenchimento de formulário
+          p Simplificar o processo de preenchimento de formulários para novos cursos e docentes.
         .col-md-4
-          h3 Intelligent Professor Matching
-          p Use AI to find the best-suited professors for each course based on their CVs.
+          h3 Busca de docentes otimizada
+          p Utilize a IA para encontrar os professores mais adequados para cada curso com base nos seus currículos.
         .col-md-4
-          h3 AI-Powered Descriptions
-          p Automatically generate course descriptions with the help of AI.
-  .testimonials#testimonials
-    .container
-      h2.text-center.mt-5 Testimonials
-      .row.mt-4
-        .col-md-4
-          .testimonial
-            p "EduSphere has revolutionized the way I handle course management. It's incredibly efficient and accurate."
-            footer
-              cite &mdash; Dr. John Doe, University of Education
-        .col-md-4
-          .testimonial
-            p "Finding the right professors for each course has never been easier. EduSphere saves us so much time."
-            footer
-              cite &mdash; Dr. Jane Smith, University of Knowledge
-        .col-md-4
-          .testimonial
-            p "The AI-generated descriptions are spot-on and save a lot of manual work. Highly recommended!"
-            footer
-              cite &mdash; Dr. Alan Brown, University of Science
+          h3 Descrições com IA
+          p Elabore automaticamente descrições de cursos com a ajuda da IA.
   .contact#contact
     .container
-      h2.text-center.mt-5 Contact Us
-      p.text-center If you have any questions or would like to learn more, feel free to get in touch.
+      h2.text-center.mt-5 Fale connosco 
+      p.text-center Se tiver alguma dúvida ou sugestão, não hesite em entrar em contacto.
       form(action='/contact' method='post')
         .form-group
-          label(for='name') Name
+          label(for='name') Nome
           input.form-control(type='text' id='name' name='name' required)
         .form-group
           label(for='email') Email
           input.form-control(type='email' id='email' name='email' required)
         .form-group
-          label(for='message') Message
+          label(for='message') Mensagem
           textarea.form-control(id='message' name='message' rows='4' required)
-        button.btn.btn-primary(type='submit') Send Message
+        button.btn.btn-primary(type='submit') Enviar

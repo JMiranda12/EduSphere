@@ -1,31 +1,31 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7fa; /* Light background color */
-  color: #333; /* Set default text color */
+  background-color: #f4f7fa; 
+  color: #333; 
 }
 
 .navbar {
-  background-color: #002f6c; /* Dark blue color for navbar */
+  background-color: #002f6c; 
 }
 
 .hero {
-  background-color: #004080; /* Darker blue for hero section */
-  color: #fff; /* White text color for hero section */
+  background-color: #004080; 
+  color: #fff;
   padding: 100px 0;
 }
 
 .hero .btn-light {
-  background-color: #f8f9fa; /* Light color for button */
-  color: #004080; /* Darker blue text color */
+  background-color: #f8f9fa;
+  color: #004080; 
   border: none;
 }
 
 .hero .btn-light:hover {
-  background-color: #e2e6ea; /* Slightly darker on hover */
+  background-color: #e2e6ea; 
 }
 
 .features, .testimonials, .contact {
-  background-color: #ffffff; /* White background for features, testimonials, and contact sections */
+  background-color: #ffffff; 
   padding: 50px 0;
 }
 
@@ -37,8 +37,8 @@ body {
 }
 
 footer {
-  background-color: #002f6c; /* Dark blue background for footer */
-  color: #fff; /* Set footer text color for contrast */
+  background-color: #002f6c; 
+  color: #fff; 
   padding: 20px 0;
 }
 
@@ -51,31 +51,30 @@ footer a:hover {
 }
 
 .logo {
-  width: 50px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  width: 50px;
+  height: auto; 
   margin-right: 10px;
 }
 
 .container {
-  padding-top: 50px; /* Top padding for the container */
-}
+  padding-top: 50px; 
 
 .card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for a nice effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background-color: #004080; /* Darker blue for header */
-  color: #fff; /* White text color for header */
+  background-color: #004080; 
+  color: #fff; 
 }
 
 .btn-primary {
-  background-color: #004080; /* Darker blue for button */
+  background-color: #004080; 
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #003366; /* Darker shade on hover */
+  background-color: #003366; 
 }
 
 nav ul {
@@ -140,15 +139,16 @@ nav ul li ul li a {
 }
 
 .modal-body {
-  max-height: 400px; /* Adjust as needed */
+  max-height: 400px; 
   overflow-y: auto;
 }
 
 .modal-body p strong {
   display: inline-block;
-  width: 150px; /* Adjust as needed */
+  width: 150px; 
 }
 
 .modal-body p span {
   display: inline-block;
+}
 }

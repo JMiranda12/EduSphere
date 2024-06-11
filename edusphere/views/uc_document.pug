@@ -58,26 +58,26 @@ block content
       button.btn.btn-primary(type='submit') Submit
 
     // Button to open AI chat-box
-    button.btn.btn-secondary(type='button' data-toggle='modal' data-target='#aiModal') Open AI Assistant
+    button.btn.btn-secondary(type='button' data-toggle='modal' data-target='#aiModal') Assistente IA
 
     // Modal for AI chat-box
     .modal.fade#aiModal(tabindex='-1' role='dialog')
       .modal-dialog(role='document')
         .modal-content
           .modal-header
-            h5.modal-title AI Assistant
-            button.close(type='button' data-dismiss='modal' aria-label='Close')
+            h5.modal-title Assistente IA
+            button.close(type='button' data-dismiss='modal' aria-label='Fechar')
               span(aria-hidden='true') &times;
           .modal-body
-            textarea.form-control#aiPrompt(rows='3' placeholder='Enter your prompt here...')
-            button.btn.btn-primary#sendPrompt(type='button') Send
+            textarea.form-control#aiPrompt(rows='3' placeholder='Escreva a descrição que pretende elaborar ...')
+            button.btn.btn-primary#sendPrompt(type='button') Enviar
             hr
             .ai-response#aiResponse
             // Loading spinner
             .spinner-border#loadingSpinner(role='status' style='display: none;')
               span.sr-only Loading...
           .modal-footer
-            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Fechar
 
     script.
       document.getElementById('sendPrompt').addEventListener('click', async () => {

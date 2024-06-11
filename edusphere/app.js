@@ -6,31 +6,30 @@ const { JSDOM } = require('jsdom');
 const docxtemplater = require('docxtemplater');
 const PizZip = require('pizzip');
 const mammoth = require('mammoth');
-const { Pool } = require('pg');  // Add this line
+const { Pool } = require('pg');
+const { exec } = require('child_process');
 
 const app = express();
 
-// Set up the PostgreSQL client
 const pool = new Pool({
   user: 'masteradmin',
   host: 'eduspheredb.c5km4ii2op0l.eu-west-3.rds.amazonaws.com',
   database: 'edusphereDB',
   password: 'adminadmin',
-  port: 5432,  // Default PostgreSQL port
+  port: 5432,  
 });
 
-// Set Pug as the template engine
+// Pug
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files from the 'public' directory
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Body parser middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Define routes
+// Routes
 app.get('/', (req, res) => {
   res.render('index', { title: 'EduSphere' });
 });
@@ -76,12 +75,38 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
 app.get('/teachers/search', (req, res) => {
   res.render('teachers_search', { title: 'Search Teachers' });
 });
 
-// Fetch and display the list of teachers
+
+app.get('/teachers/add', (req, res) => {
+  res.render('add_teacher', { title: 'Add Teacher' });
+});
+
+
+app.post('/teachers/add', (req, res) => {
+  const cienciaID = req.body.ciencia_id;
+  
+  // Path to Python script
+  const scriptPath = path.join(__dirname, 'scripts', 'scrape_and_insert.py');
+  
+  // Execute the Python script with the provided Ciencia ID
+  exec(`python ${scriptPath} ${cienciaID}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing script: ${error.message}`);
+      return res.status(500).render('add_teacher', { title: 'Add Teacher', error: `Error adding teacher: ${error.message}` });
+    }
+    if (stderr) {
+      console.error(`Script stderr: ${stderr}`);
+      return res.status(500).render('add_teacher', { title: 'Add Teacher', error: `Script error: ${stderr}` });
+    }
+    console.log(`Script stdout: ${stdout}`);
+    res.render('add_teacher', { title: 'Add Teacher', success: 'Teacher added successfully' });
+  });
+});
+
+// Teachers list
 app.get('/teachers/list', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM teachers');
@@ -112,7 +137,7 @@ app.post('/uc/document', (req, res) => {
   const wordFilePath = path.resolve(__dirname, 'output', 'document.docx');
   fs.writeFileSync(wordFilePath, buf);
 
-  // Convert the Word document to PDF
+  // Not working - PDF 
   const convertToPDF = async (inputPath, outputPath) => {
     try {
       const result = await mammoth.convertToHtml({ path: inputPath });
@@ -145,7 +170,7 @@ app.post('/api/ai', async (req, res) => {
   const { prompt } = req.body;
   try {
     const response = await axios.post('http://localhost:8080/v1/chat/completions', {
-      model: "lmstudio-ai/gemma-2b-it-GGUF", // Replace with your model name
+      model: "lmstudio-ai/gemma-2b-it-GGUF",
       messages: [{ role: "user", content: prompt }]
     });
     res.json({ response: response.data.choices[0].message.content });

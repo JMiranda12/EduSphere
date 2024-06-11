@@ -1,4 +1,4 @@
-doctype html
+//- Ensure this is the very first line
 extends layout
 
 block content
@@ -20,27 +20,3 @@ block content
       if message
         .alert.alert-danger= message
       button.btn.btn-primary(type='submit') Register
-
-html
-  head
-    title Register
-    link(rel='stylesheet', href='/css/styles.css')
-  body
-    h1 Register
-    form(action='/register' method='post')
-      div
-        label(for='name') Name:
-        input(type='text' name='name' required)
-      div
-        label(for='email') Email:
-        input(type='email' name='email' required)
-      div
-        label(for='password') Password:
-        input(type='password' name='password' required)
-      div
-        label(for='confirmPassword') Confirm Password:
-        input(type='password' name='confirmPassword' required)
-      div
-        button(type='submit') Register
-    if message
-      p #{message}

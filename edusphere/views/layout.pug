@@ -24,12 +24,15 @@ html
                 .dropdown-menu(aria-labelledby='teachersDropdown')
                   a.dropdown-item(href='/teachers/search') Search
                   a.dropdown-item(href='/teachers/list') List
+                  a.dropdown-item(href='/teachers/add') Add Teacher 
               li.nav-item.dropdown
                 a.nav-link.dropdown-toggle(href='#' id='ucDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') UC
                 .dropdown-menu(aria-labelledby='ucDropdown')
                   a.dropdown-item(href='/uc/document') Document
               li.nav-item
                 a.nav-link(href='/login') Login
+              li.nav-item
+                a.nav-link(href='/register') Register
     block content
 
     footer.bg-dark.text-white.py-3
