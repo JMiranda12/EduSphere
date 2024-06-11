@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa; 
+  color: #333; 
+}
+
+.navbar {
+  background-color: #002f6c; 
+}
+
+.hero {
+  background-color: #004080; 
+  color: #fff;
+  padding: 100px 0;
+}
+
+.hero .btn-light {
+  background-color: #f8f9fa;
+  color: #004080; 
+  border: none;
+}
+
+.hero .btn-light:hover {
+  background-color: #e2e6ea; 
+}
+
+.features, .testimonials, .contact {
+  background-color: #ffffff; 
+  padding: 50px 0;
+}
+
+.testimonial {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #002f6c; 
+  color: #fff; 
+  padding: 20px 0;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+.logo {
+  width: 50px;
+  height: auto; 
+  margin-right: 10px;
+}
+
+.container {
+  padding-top: 50px; 
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #004080; 
+  color: #fff; 
+}
+
+.btn-primary {
+  background-color: #004080; 
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #003366; 
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+nav ul li ul {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li:hover ul {
+  display: block;
+}
+
+nav ul li ul li {
+  display: block;
+}
+
+nav ul li ul li a {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.suggestions {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+  display: none;
+}
+
+.suggestions.active {
+  display: block;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-body {
+  max-height: 400px; 
+  overflow-y: auto;
+}
+
+.modal-body p strong {
+  display: inline-block;
+  width: 150px; 
+}
+
+.modal-body p span {
+  display: inline-block;
+}
+}

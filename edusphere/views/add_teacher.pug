@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .container
+    h1 Add Teacher
+    if success
+      .alert.alert-success= success
+    if error
+      .alert.alert-danger= error
+    form(method="post", action="/teachers/add")
+      .form-group
+        label(for="ciencia_id") Ciência ID Number
+        input.form-control(type="text", name="ciencia_id" id="ciencia_id" placeholder="Enter Ciência ID number" required)
+      button.btn.btn-primary(type="submit") Add Teacher

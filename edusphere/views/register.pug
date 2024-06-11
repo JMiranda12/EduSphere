@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .container
+    h1 Register
+    form(action='/register' method='post')
+      .form-group
+        label(for='name') Name
+        input.form-control(type='text' id='name' name='name' required)
+      .form-group
+        label(for='email') Email
+        input.form-control(type='email' id='email' name='email' required)
+      .form-group
+        label(for='password') Password
+        input.form-control(type='password' id='password' name='password' required)
+      .form-group
+        label(for='confirmPassword') Confirm Password
+        input.form-control(type='password' id='confirmPassword' name='confirmPassword' required)
+      if message
+        .alert.alert-danger= message
+      button.btn.btn-primary(type='submit') Register

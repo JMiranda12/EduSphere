@@ -1,0 +1,118 @@
+extends layout
+
+block content
+  .container
+    h1 List of Teachers
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Date of Birth
+          th Email
+          th Address
+          th Website
+          th Study Area
+      tbody
+        each teacher in teachers
+          tr
+            td
+              a(href='#', class='teacher-link', data-id=teacher.id)= teacher.full_name
+            td= new Date(teacher.date_of_birth).toLocaleDateString('en-GB')
+            td= teacher.email
+            td= teacher.address
+            td= teacher.website
+            td= teacher.study_area
+
+    // Modal for teacher details
+    .modal.fade#teacherModal(tabindex='-1', role='dialog', aria-labelledby='teacherModalLabel', aria-hidden='true')
+      .modal-dialog.modal-lg(role='document')  
+        .modal-content
+          .modal-header
+            h5#teacherModalLabel.modal-title Teacher Details
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            p
+              strong Name: 
+              span#modalFullName
+            p
+              strong Date of Birth: 
+              span#modalDateOfBirth
+            p
+              strong Email: 
+              span#modalEmail
+            p
+              strong Address: 
+              span#modalAddress
+            p
+              strong Website: 
+              span#modalWebsite
+            p
+              strong Study Area: 
+              span#modalStudyArea
+            h5 Education
+            ul#modalEducation
+            h5 Publications
+            ul#modalPublications
+          .modal-footer
+            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+  script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const teacherLinks = document.querySelectorAll('.teacher-link');
+      const modalFullName = document.getElementById('modalFullName');
+      const modalDateOfBirth = document.getElementById('modalDateOfBirth');
+      const modalEmail = document.getElementById('modalEmail');
+      const modalAddress = document.getElementById('modalAddress');
+      const modalWebsite = document.getElementById('modalWebsite');
+      const modalStudyArea = document.getElementById('modalStudyArea');
+      const modalEducation = document.getElementById('modalEducation');
+      const modalPublications = document.getElementById('modalPublications');
+      const teacherModalElement = document.getElementById('teacherModal');
+      const teacherModal = new bootstrap.Modal(teacherModalElement);
+
+      teacherLinks.forEach(link => {
+        link.addEventListener('click', async function(event) {
+          event.preventDefault();
+          const teacherId = this.getAttribute('data-id');
+          
+          try {
+            const response = await axios.get(`http://localhost:5000/api/teachers/${teacherId}`);
+            const teacher = response.data;
+
+            modalFullName.textContent = teacher.full_name;
+            modalDateOfBirth.textContent = new Date(teacher.date_of_birth).toLocaleDateString('en-GB');
+            modalEmail.textContent = teacher.email;
+            modalAddress.textContent = teacher.address;
+            modalWebsite.textContent = teacher.website;
+            modalStudyArea.textContent = teacher.study_area;
+
+            modalEducation.innerHTML = '';
+            teacher.education.forEach(edu => {
+              const li = document.createElement('li');
+              li.textContent = `${edu.start_year} - ${edu.end_year}: ${edu.degree} at ${edu.university} (${edu.status})`;
+              modalEducation.appendChild(li);
+            });
+
+            modalPublications.innerHTML = '';
+            teacher.publications.forEach(pub => {
+              const li = document.createElement('li');
+              li.textContent = `${pub.publication_type}: "${pub.title}" by ${pub.authors}`;
+              if (pub.link) {
+                const a = document.createElement('a');
+                a.href = pub.link;
+                a.textContent = ' [Link]';
+                a.target = '_blank'; 
+                li.appendChild(a);
+              }
+              modalPublications.appendChild(li);
+            });
+
+            teacherModal.show();
+          } catch (error) {
+            console.error('Error fetching teacher details:', error);
+          }
+        });
+      });
+    });

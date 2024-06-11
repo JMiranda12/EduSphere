@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .container
+    h1 Login
+    form(action='/login' method='post')
+      .form-group
+        label(for='email') Email
+        input.form-control(type='email' id='email' name='email' required)
+      .form-group
+        label(for='password') Password
+        input.form-control(type='password' id='password' name='password' required)
+      if error
+        .alert.alert-danger= error
+      button.btn.btn-primary(type='submit') Login

@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .hero
+    .container.text-center
+      h1.display-4 EduSphere
+      p.lead A ferramenta ideal para gestão universitária
+      a.btn.btn-lg.btn-light(href='#features') Descobrir
+  .features#features
+    .container
+      h2.text-center.mt-5 Funcionalidades
+      .row.mt-4
+        .col-md-4
+          h3 Preenchimento de formulário
+          p Simplificar o processo de preenchimento de formulários para novos cursos e docentes.
+        .col-md-4
+          h3 Busca de docentes otimizada
+          p Utilize a IA para encontrar os professores mais adequados para cada curso com base nos seus currículos.
+        .col-md-4
+          h3 Descrições com IA
+          p Elabore automaticamente descrições de cursos com a ajuda da IA.
+  .contact#contact
+    .container
+      h2.text-center.mt-5 Fale connosco 
+      p.text-center Se tiver alguma dúvida ou sugestão, não hesite em entrar em contacto.
+      form(action='/contact' method='post')
+        .form-group
+          label(for='name') Nome
+          input.form-control(type='text' id='name' name='name' required)
+        .form-group
+          label(for='email') Email
+          input.form-control(type='email' id='email' name='email' required)
+        .form-group
+          label(for='message') Mensagem
+          textarea.form-control(id='message' name='message' rows='4' required)
+        button.btn.btn-primary(type='submit') Enviar
