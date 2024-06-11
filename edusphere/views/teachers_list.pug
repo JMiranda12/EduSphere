@@ -25,7 +25,7 @@ block content
 
     // Modal for teacher details
     .modal.fade#teacherModal(tabindex='-1', role='dialog', aria-labelledby='teacherModalLabel', aria-hidden='true')
-      .modal-dialog.modal-lg(role='document')  // Change .modal-lg to .modal-xl for an even larger modal
+      .modal-dialog.modal-lg(role='document')  
         .modal-content
           .modal-header
             h5#teacherModalLabel.modal-title Teacher Details
@@ -103,7 +103,7 @@ block content
                 const a = document.createElement('a');
                 a.href = pub.link;
                 a.textContent = ' [Link]';
-                a.target = '_blank'; // Open link in a new tab
+                a.target = '_blank'; 
                 li.appendChild(a);
               }
               modalPublications.appendChild(li);
